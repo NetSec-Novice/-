@@ -1,2 +1,371 @@
 # -
-怎样才能脱颖而出呢？不如来尝试一次项目制作吧
+怎样才能脱颖而出呢？
+不妨尝试从零开始一步一步学习吧
+只是一个提供路线以及学习资料跳转点的网站雏形。
+<!-- name=index.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>信息安全学生多路线成长平台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    body { 
+      max-width: 1000px; 
+      margin: 0 auto; 
+      padding: 2em 1em; 
+      font-family: '微软雅黑', Arial, sans-serif; 
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    h1, h2 { 
+      color: #194795; 
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #194795, #2a70d9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2.5em;
+      line-height: 1.6;
+    }
+    .route-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2em;
+      margin-bottom: 3em;
+    }
+    .route-card { 
+      border: 1px solid #e2e6ea; 
+      padding: 0; 
+      border-radius: 12px; 
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .route-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-color: #194795;
+    }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #e2e6ea;
+    }
+    .card-content {
+      padding: 1.5em;
+    }
+    .route-card h3 {
+      color: #194795;
+      margin-bottom: 0.8em;
+      font-size: 1.3rem;
+    }
+    .route-card p {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 1.2em;
+    }
+    .btn { 
+      display: inline-block;
+      background: #194795; 
+      color: white; 
+      padding: 10px 20px; 
+      border: none; 
+      border-radius: 6px; 
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .btn:hover {
+      background: #2a70d9;
+      transform: scale(1.05);
+    }
+    .back-btn {
+      position: fixed;
+      bottom: 2em;
+      right: 2em;
+      background: #194795;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 50%;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    .back-btn:hover {
+      background: #2a70d9;
+    }
+    #routeDetail {
+      background: #fff;
+      padding: 2.5em;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      margin-top: 2em;
+      display: none; /* 默认隐藏 */
+    }
+    #routeDetail.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .resource, .question { 
+      margin-left: 1.5em;
+      line-height: 1.8;
+      color: #555;
+    }
+    #routeDetail h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #e2e6ea;
+      padding-bottom: 0.5em;
+      margin-bottom: 1.5em;
+      text-align: left;
+    }
+    #routeDetail h3 {
+      color: #194795;
+      margin: 1.8em 0 1em;
+      font-size: 1.3rem;
+    }
+    #routeDetail ol, #routeDetail ul {
+      margin-left: 1.2em;
+      line-height: 1.8;
+    }
+    #routeDetail li {
+      margin-bottom: 0.8em;
+    }
+    #routeDetail a {
+      color: #2a70d9;
+      text-decoration: none;
+    }
+    #routeDetail a:hover {
+      text-decoration: underline;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e2e6ea;
+      margin: 2em 0;
+    }
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .route-container { grid-template-columns: 1fr; }
+      #routeDetail { padding: 1.5em; }
+      .back-btn { bottom: 1em; right: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>信息安全多路线成长平台</h1>
+  <p class="intro">为信息安全学生规划不同专业发展路线，从零基础到高效就业，系统推荐最可靠教程和实战题库。</p>
+  
+  <h2>请选择你的目标路线：</h2>
+  <div class="route-container">
+    <div class="route-card">
+      <img src="https://picsum.photos/id/180/800/400" alt="渗透测试路线" class="card-img">
+      <div class="card-content">
+        <h3>1. 渗透测试路线</h3>
+        <p>面向网络攻防，CTF、渗透测试等实战为主。</p>
+        <a href="#routeDetail" class="btn" onclick="showRoute('pentest');return false;">进入路线</a>
+      </div>
+    </div>
+    <div class="route-card">
+      <img src="https://picsum.photos/id/48/800/400" alt="应急响应/安全运维" class="card-img">
+      <div class="card-content">
+        <h3>2. 应急响应/安全运维</h3>
+        <p>网络安全事件响应、日志分析、日常安全运维管理。</p>
+        <a href="#routeDetail" class="btn" onclick="showRoute('response');return false;">进入路线</a>
+      </div>
+    </div>
+    <div class="route-card">
+      <img src="https://picsum.photos/id/160/800/400" alt="安全开发/漏洞挖掘" class="card-img">
+      <div class="card-content">
+        <h3>3. 安全开发/漏洞挖掘</h3>
+        <p>专注安全编程、漏洞分析利用、安全工具开发。</p>
+        <a href="#routeDetail" class="btn" onclick="showRoute('securedev');return false;">进入路线</a>
+      </div>
+    </div>
+    <div class="route-card">
+      <img src="https://picsum.photos/id/306/800/400" alt="风险/合规管理" class="card-img">
+      <div class="card-content">
+        <h3>4. 风险/合规管理</h3>
+        <p>适合对管理、审计感兴趣者，结合技术与规范。</p>
+        <a href="#routeDetail" class="btn" onclick="showRoute('risk');return false;">进入路线</a>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div id="routeDetail"></div>
+  <a href="#top" class="back-btn" id="backBtn" style="display:none;" onclick="hideRoute()">←</a>
+
+<script>
+// 显示路线详情
+function showRoute(route){
+  // 隐藏路线选择区，显示详情区
+  document.querySelector('.route-container').style.display = 'none';
+  document.querySelector('h2').style.display = 'none';
+  document.querySelector('.intro').style.display = 'none';
+  
+  let data = {
+    pentest: {
+      title: "渗透测试路线",
+      steps: [
+        "零基础安全基础知识：<br>- 推荐教材：《信息安全导论》《Web安全攻防》《黑客攻防技术宝典》<br>- 入门在线课程：<a href='https://www.imooc.com/learn/1155' target='_blank'>入门网络安全</a>",
+        "中阶：系统与网络攻防<br>- <a href='https://www.cnblogs.com/skyl/p/11766572.html' target='_blank'>Windows/Linux基础靶机实战</a><br>- CTF题目练习（<a href='https://buuoj.cn/challenges' target='_blank'>BUUOJ</a>、<a href='https://www.nowcoder.com/contestRoom?type=security' target='_blank'>牛客信息安全</a>）",
+        "Web渗透、代码审计：<br>- Webgoat练习环境 <a href='https://owasp.org/www-project-webgoat/' target='_blank'>WebGoat</a><br>- 经典书籍：《白帽子讲Web安全》《Web安全深度剖析》",
+        "高级：自动化工具、漏洞挖掘、实战面试题<br>- 经典平台：<a href='shturl.cc/pdjKuVFbORAbvN' target='_blank'>VulnHub</a> <a href='https://hackthebox.com/' target='_blank'>HackTheBox</a>",
+      ],
+      resources: [
+        "- CTFHub攻防学习资源：<a href='https://ctfhub.com/' target='_blank'>https://ctfhub.com/</a>",
+        "- SDN安全自学路线：<a href='https://mp.weixin.qq.com/s/secrPt9yW81k6MbwBtsy6A' target='_blank'>公众号 · 安全自学路线</a>",
+        "- 2026最新网络安全就业知识体系地图：<a href='https://mp.weixin.qq.com/s/2sFYA7vIdRNHT9K9ZlqucA' target='_blank'>知乎</a>",
+        "- 渗透经典笔记库：<a href='https://www.cnblogs.com/skyl/p/11766572.html' target='_blank'>cnblogs</a>",
+      ],
+      exam: [
+        "<b>典型例题：</b>",
+        "1. 某靶场提供Web SQL注入入口点，如何手动利用获取flag（BUUOJ 2024真题）",
+        "2. 2023某大厂安全工程师面试题：分析常见CSRF防御手段，其优缺点及绕过思路。",
+        "3. 分析一次活动日志，判断何处为XSS攻击并防御？",
+        "4. 模拟利用msf完成Windows主机提权。"
+      ],
+      practice: [
+        "- <a href='https://buuoj.cn/' target='_blank'>BUUOJ(Ctf题)</a>",
+        "- <a href='https://www.nowcoder.com/contestRoom?type=security' target='_blank'>牛客信息安全题库</a>",
+        "- <a href='https://leetcode.cn/problemset/all/?topicSlugs=security' target='_blank'>LeetCode安全题</a>",
+        "- 在线代码平台：<a href='https://www.runoob.com/' target='_blank'>Runoob在线运行</a>"
+      ]
+    },
+    response: {
+      title: "应急响应/安全运维路线",
+      steps: [
+        "基础知识：操作系统与网络基础、日志分析、主流安全事件案例学习",
+        "SOP编写、模拟演练：推荐 <a href='https://github.com/anbai-inc/logTest' target='_blank'>日志分析实训</a>",
+        "蓝队工具实战：SIEM、EDR、Wazuh部署与告警关联分析",
+        "应急流程与策略：流程图/自定义沙箱/仿真演练"
+      ],
+      resources: [
+        "- 《计算机安全蓝队手册》<a href='https://book.douban.com/subject/33441034/' target='_blank'>豆瓣</a>",
+        "- 网络安全应急响应公开课：<a href='https://edu.51cto.com/course/20270.html' target='_blank'>51CTO</a>",
+        "- Wazuh官方文档：<a href='https://documentation.wazuh.com/' target='_blank'>Wazuh Docs</a>"
+      ],
+      exam: [
+        "<b>常考例题：</b>",
+        "1. 查看以下tomcat日志，识别入侵路径。(2024应急笔试真题) ",
+        "2. 常用应急流程中，勒索病毒初步响应应如何操作？",
+        "3. 请举例说明如何清理日志痕迹。"
+      ],
+      practice: [
+        "- <a href='https://www.nowcoder.com/contestRoom?type=security' target='_blank'>牛客信息安全题库</a>",
+        "- <a href='https://play.picoctf.org/practice' target='_blank'>picoCTF</a>",
+        "- 在线日志分析平台：<a href='https://try.wazuh.com/' target='_blank'>Wazuh Demo</a>"
+      ]
+    },
+    securedev: {
+      title: "安全开发/漏洞挖掘路线",
+      steps: [
+        "代码基础：Python/C/Go等语言实战，项目驱动开发",
+        "常见漏洞原理+代码分析：CVE学习、源码审计(<a href='https://github.com/knownsec/Python-BlackHat' target='_blank'>黑帽Python</a>)",
+        "二进制漏洞挖掘、自动化利用脚本开发",
+        "安全工具集成（Burp/Wireshark/IDA）、Fuzz测试"
+      ],
+      resources: [
+        "- 《黑客与画家》《Python黑帽子》",
+        "- 360漏洞知识库：<a href='https://wiki.360.cn/knowledge-base' target='_blank'>360Wiki</a>",
+        "- 安全开发课：<a href='https://edu.csdn.net/course/detail/26898' target='_blank'>CSDN</a>"
+      ],
+      exam: [
+        "<b>典型例题：</b>",
+        "1. 编写Python脚本对某开源CMS检测SQL注入点（牛客2025面试题）",
+        "2. 近期CVE如log4j利用原理，请详细分析。"
+      ],
+      practice: [
+        "- <a href='https://leetcode.cn/problemset/all/?topicSlugs=security' target='_blank'>LeetCode安全题</a>",
+        "- <a href='https://tryhackme.com/' target='_blank'>TryHackMe靶场平台</a>",
+        "- 在线代码平台：<a href='https://www.programiz.com/python-programming/online-compiler/' target='_blank'>Programiz Python</a>"
+      ]
+    },
+    risk: {
+      title: "风险/合规管理路线",
+      steps: [
+        "合规标准/法律法规：等保/ISO27001/CIS/TISAX",
+        "信息安全管理体系ISMS、漏洞管理与测评",
+        "安全治理最佳实践（案例分析、政策文档撰写、审计流程）",
+        "常见面试、政策解析题实操"
+      ],
+      resources: [
+        "- 公开标准：<a href='https://www.tc260.org.cn/' target='_blank'>国家标准</a>, <a href='https://www.iso.org/isoiec-27001-information-security.html' target='_blank'>ISO27001</a>",
+        "- 法规解读：<a href='https://www.anquanke.com/post/id/178650' target='_blank'>安全客</a>"
+      ],
+      exam: [
+        "<b>常见考题：</b>",
+        "1. 简述等保2.0分级思路及各级要求（2024法规面试/公务员真题）",
+        "2. 举例说明CIS Controls核心点，并列举应用场景。",
+        "3. 拟写企业信息安全管理政策大纲。"
+      ],
+      practice: [
+        "- <a href='https://www.nowcoder.com/contestRoom?type=security' target='_blank'>牛客信息安全题库</a>",
+        "- 在线政策文档撰写平台：<a href='https://docs.qq.com/' target='_blank'>腾讯文档</a>"
+      ]
+    }
+  };
+
+  let d = data[route];
+  let html = `<h2>${d.title}</h2><h3>成长路线图：</h3><ol>`;
+  d.steps.forEach(s=>html+=`<li>${s}</li>`);
+  html += `</ol><h3>权威资料：</h3><ul>`;
+  d.resources.forEach(r=>html+=`<li class='resource'>${r}</li>`);
+  html += `</ul><h3>经典题目推荐与解析：</h3><ul>`;
+  d.exam.forEach(e=>html+=`<li class='question'>${e}</li>`);
+  html += `</ul><h3>实战练习（含在线平台）：</h3><ul>`;
+  d.practice.forEach(p=>html+=`<li class='resource'>${p}</li>`);
+  
+  // 显示详情并添加激活类
+  const detailEl = document.getElementById("routeDetail");
+  detailEl.innerHTML = html;
+  detailEl.classList.add('active');
+  
+  // 显示返回按钮
+  document.getElementById('backBtn').style.display = 'block';
+  
+  // 平滑滚动到详情区
+  detailEl.scrollIntoView({ behavior: 'smooth' });
+}
+
+// 隐藏路线详情，返回选择页
+function hideRoute() {
+  const detailEl = document.getElementById("routeDetail");
+  detailEl.classList.remove('active');
+  detailEl.innerHTML = '';
+  
+  // 显示路线选择区
+  document.querySelector('.route-container').style.display = 'grid';
+  document.querySelector('h2').style.display = 'block';
+  document.querySelector('.intro').style.display = 'block';
+  
+  // 隐藏返回按钮
+  document.getElementById('backBtn').style.display = 'none';
+  
+  // 平滑滚动到顶部
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
